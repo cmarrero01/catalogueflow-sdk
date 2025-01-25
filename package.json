@@ -1,0 +1,21 @@
+{
+  "name": "catalogueflow-sdk",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "SDK for interacting with the CatalogueFlow API",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmarrero01/catalogueflow-sdk.git"
+  },
+  "keywords": ["sdk", "catalogueflow", "api", "ecommerce"],
+  "author": "Claudio Marrero",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7"
+  }
+}
