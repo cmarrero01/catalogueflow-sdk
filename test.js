@@ -18,30 +18,29 @@ const main = async () => {
             language: "english",
         };
 
-        // Test metaTitle
-        const title = await client.metaTitle(product);
-        console.log("Meta Title:", title);
+        // // Test metaTitle
+        // const title = await client.metaTitle(product);
+        // console.log("Meta Title:", title);
 
-        // Test metaDescription
-        const metaDescription = await client.metaDescription(product);
-        console.log("Meta Description:", metaDescription);
+        // // Test metaDescription
+        // const metaDescription = await client.metaDescription(product);
+        // console.log("Meta Description:", metaDescription);
 
-        // Test richDescription
-        const format = "<h1>{{name}}</h1><p>{{description}}</p>";
-        const richDescription = await client.richDescription(product, format);
-        console.log("Rich Description:", richDescription);
+        // // Test richDescription
+        // const format = "<h1>{{name}}</h1><p>{{description}}</p>";
+        // const richDescription = await client.richDescription(product, format);
+        // console.log("Rich Description:", richDescription);
 
-        // Test imageDescription
-        const imageDescription = await client.imageDescription(product, false); // Non-streamed
-        console.log("Image Description:", imageDescription);
+        // // Test imageDescription
+        // const imageDescription = await client.imageDescription(product, false); // Non-streamed
+        // console.log("Image Description:", imageDescription);
 
-        // Test imageDescription with streaming
-        const streamedImageDescription = await client.imageDescription(product, true); // Streamed
-        console.log("Streamed Image Description:", streamedImageDescription);
+        // // Test imageDescription with streaming
+        // const streamedImageDescription = await client.imageDescription(product, true); // Streamed
+        // console.log("Streamed Image Description:", streamedImageDescription);
 
         // Test translateContent
-        const content = "Durable wheelchair for mobility.";
-        const translation = await client.translateContent(content, "spanish");
+        const translation = await client.translateContent(product, "spanish");
         console.log("Translation:", translation);
     } catch (error) {
         console.error("Error:", error);

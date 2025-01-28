@@ -1,7 +1,7 @@
 {
   "name": "catalogueflow-sdk",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "SDK for interacting with the CatalogueFlow API",
   "main": "index.js",
   "scripts": {

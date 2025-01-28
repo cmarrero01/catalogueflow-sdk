@@ -88,16 +88,16 @@ class CatalogueFlow {
      * @param {string} language - The target language for translation.
      * @returns {Promise<Object>} - The translated content.
      */
-    async translateContent(content, language) {
-        if (!content || typeof content !== "string") {
-            throw new Error("The 'content' field is required and must be a string.");
+    async translateContent(product, language) {
+        if (!product || typeof product !== "object") {
+            throw new Error("The 'product' field is required and must be an object.");
         }
 
         if (!language || typeof language !== "string") {
             throw new Error("The 'language' field is required and must be a string.");
         }
 
-        return this._request("/translate", { content, language });
+        return this._request("/translate", { product, language, stream : false });
     }
 
     /**
