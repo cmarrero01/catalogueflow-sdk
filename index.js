@@ -11,7 +11,7 @@ class CatalogueFlow {
      * @param {string} options.secretKey - The secret key provided by CatalogueFlow.
      * @param {string} [options.baseUrl] - The base URL of the API (default: "https://public.catalogflow.ai/v1").
      */
-    constructor({ appKey, secretKey, baseUrl = "https://public.catalogflow.ai/v1/seo" }) {
+    constructor({ appKey, secretKey, baseUrl = "https://public.catalogflow.ai/v1" }) {
         if (!appKey || !secretKey) {
             throw new Error("appKey and secretKey are required");
         }
@@ -37,7 +37,7 @@ class CatalogueFlow {
      * @returns {Promise<Object>} - The generated meta title.
      */
     async metaTitle(product) {
-        return this._request("/meta-title", { product });
+        return this._request("/seo/meta-title", { product });
     }
 
     /**
@@ -46,7 +46,7 @@ class CatalogueFlow {
      * @returns {Promise<Object>} - The generated meta description.
      */
     async metaDescription(product) {
-        return this._request("/meta-description", { product });
+        return this._request("/seo/meta-description", { product });
     }
 
     /**
@@ -59,7 +59,7 @@ class CatalogueFlow {
         if (!format) {
             throw new Error("The 'format' field is required.");
         }
-        return this._request("/rich-description", { product, format });
+        return this._request("/seo/rich-description", { product, format });
     }
 
     /**
@@ -73,7 +73,7 @@ class CatalogueFlow {
             throw new Error("The 'product.imageUrl' field is required and must be a valid URL.");
         }
 
-        const endpoint = "/image-description";
+        const endpoint = "/seo/image-description";
 
         if (stream) {
             return this._streamRequest(endpoint, { product, stream });
@@ -97,7 +97,7 @@ class CatalogueFlow {
             throw new Error("The 'language' field is required and must be a string.");
         }
 
-        return this._request("/translate", { product, language, stream : false });
+        return this._request("/seo/translate", { product, language, stream : false });
     }
 
     /**
@@ -138,6 +138,30 @@ class CatalogueFlow {
             console.error(`Error streaming response [${endpoint}]:`, error.message);
             throw error.response?.data || error;
         }
+    }
+
+    /**
+     * Generate a rich HTML product description.
+     * @param {Object} product - Product details.
+     * @param {string} format - Desired HTML format.
+     * @param {string} [instructions] - Optional customization instructions.
+     * @returns {Promise<Object>} - The generated description.
+     */
+    async richDescriptionFullProduct(payload) {
+        if (!payload.format) {
+            throw new Error("The 'format' field is required.");
+        }
+        return this._request("/content/description", payload);
+    }
+
+    /**
+     * Generate a plain text product description.
+     * @param {Object} product - Product details.
+     * @param {string} [instructions] - Optional customization instructions.
+     * @returns {Promise<Object>} - The generated plain description.
+     */
+    async plainDescriptionFullProduct(payload) {
+        return this._request("/content/plain-description", payload);
     }
 }
 
