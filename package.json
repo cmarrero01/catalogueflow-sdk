@@ -1,6 +1,6 @@
 {
   "name": "catalogueflow-sdk",
-  "version": "2.0.0",
+  "version": "3.0.1",
   "description": "SDK for interacting with the CatalogueFlow API",
   "author": "Claudio Marrero",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "build": "tsc",
     "prepare": "npm run build",
     "test": "node dist/test/test.js",
-    "clean": "rm -rf dist"
+    "clean": "rimraf dist"
   },
   "files": [
     "dist"
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.14.1",
+    "rimraf": "^6.0.1",
     "typescript": "^5.8.3"
   }
 }
