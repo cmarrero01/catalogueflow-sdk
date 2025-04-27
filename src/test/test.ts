@@ -13,7 +13,7 @@ dotenv.config();
   try {
     const product = {
       name: "Silla de ruedas",
-      imageUrl: "https://example.com/silla.jpg",
+      imageUrl: "https://www.quirumed.com/media/catalog/product/1/1/1154YM120_Foto_variante_83bfd505-4232-43a6-a230-a0fabe494eb7.jpg",
       language: "spanish"
     };
 
@@ -55,6 +55,16 @@ dotenv.config();
     // Test plain description
     const plainDescription = await client.content.plainDescriptionFullProduct(testObject);
     console.log("plainDescription:", plainDescription);
+
+    const testImageObject = {
+      "product": {
+        "name": "Silla de ruedas",
+        "imageUrl": "https://www.quirumed.com/media/catalog/product/1/1/1154YM120_Foto_variante_83bfd505-4232-43a6-a230-a0fabe494eb7.jpg"
+      },
+      "instructions": "Please, provide an image with a nice environment with two old people using the wheelchair."
+    };
+    const imageUrl = await client.content.generateImage(testImageObject);
+    console.log("Image URL:", imageUrl);
 
   } catch (error) {
     console.error("Error:", error);

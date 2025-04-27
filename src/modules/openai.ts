@@ -8,19 +8,14 @@ export interface DescriptionPayload {
   stream?: boolean;
 }
 
-export interface ImagePayload {
-  product?: Record<string, any>;
-  instructions?: string;
-}
-
-export class ContentModule {
+export class OpenAiModule {
   private client: AxiosInstance;
 
   constructor(client: AxiosInstance) {
     this.client = client;
   }
 
-  async richDescriptionFullProduct(payload: DescriptionPayload) {
+  async chatCompletition(payload: DescriptionPayload) {
     if (!payload.format) {
       throw new Error("The 'format' field is required.");
     }
@@ -29,9 +24,5 @@ export class ContentModule {
 
   async plainDescriptionFullProduct(payload: DescriptionPayload) {
     return _request<{ description: string }>(this.client, "/content/plain-description", payload);
-  }
-
-  async generateImage(payload: ImagePayload) {
-    return _request<{ imageUrl: string }>(this.client, "/content/image", payload);
   }
 }
