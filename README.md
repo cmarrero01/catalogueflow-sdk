@@ -46,9 +46,16 @@ const client = new CatalogueFlow({
 });
 ```
 
+### Step 4: Modules
+
+The client exposes two modules:
+
+- `client.seo` – helpers to create meta titles, descriptions, translations and image descriptions.
+- `client.content` – utilities for full product descriptions and image generation.
+
 ---
 
-## Available Methods
+## SEO Module
 
 ### 1. `metaTitle(product)`
 
@@ -65,7 +72,7 @@ Generate an SEO-optimized title for a product.
 const product = { name: "Wheelchair", description: "Durable and lightweight" };
 
 (async () => {
-    const title = await client.metaTitle(product);
+    const title = await client.seo.metaTitle(product);
     console.log("Meta Title:", title);
 })();
 ```
@@ -87,7 +94,7 @@ Generate an SEO-optimized meta description for a product.
 const product = { name: "Wheelchair", description: "Durable and lightweight" };
 
 (async () => {
-    const metaDescription = await client.metaDescription(product);
+    const metaDescription = await client.seo.metaDescription(product);
     console.log("Meta Description:", metaDescription);
 })();
 ```
@@ -110,7 +117,7 @@ const product = { name: "Wheelchair", description: "Durable and lightweight" };
 const format = "<h1>{{name}}</h1><p>{{description}}</p>";
 
 (async () => {
-    const richDescription = await client.richDescription(product, format);
+    const richDescription = await client.seo.richDescription(product, format);
     console.log("Rich Description:", richDescription);
 })();
 ```
@@ -122,29 +129,8 @@ const format = "<h1>{{name}}</h1><p>{{description}}</p>";
 
 ---
 
-### 4. `generatePlainDescription(product, instructions)`
 
-Generate a plain text product description.
-
-#### Example:
-
-```javascript
-const product = { name: "Wheelchair", description: "Durable and lightweight" };
-
-(async () => {
-    const plainDescription = await client.generatePlainDescription(product);
-    console.log("Plain Description:", plainDescription);
-})();
-```
-
-#### Response:
-```json
-{ "description": "Durable and lightweight wheelchair, designed for comfort and ease of use." }
-```
-
----
-
-### 5. `imageDescription(product, stream = false)`
+### 4. `imageDescription(product, stream = false)`
 
 Generate a detailed description for a product image.
 
@@ -157,7 +143,7 @@ const product = {
 };
 
 (async () => {
-    const imageDescription = await client.imageDescription(product);
+    const imageDescription = await client.seo.imageDescription(product);
     console.log("Image Description:", imageDescription);
 })();
 ```
@@ -169,7 +155,7 @@ const product = {
 
 ---
 
-### 6. `translateContent(content, language)`
+### 5. `translateContent(content, language)`
 
 Translate content into a specified language with cultural and regional adaptation.
 
@@ -180,7 +166,7 @@ const content = "Durable wheelchair for mobility.";
 const language = "spanish";
 
 (async () => {
-    const translation = await client.translateContent(content, language);
+    const translation = await client.seo.translateContent(content, language);
     console.log("Translation:", translation);
 })();
 ```
@@ -192,13 +178,68 @@ const language = "spanish";
 
 ---
 
+## Content Module
+
+### 1. `richDescriptionFullProduct(payload)`
+
+Generate a rich HTML description for a complete product using a custom format.
+
+#### Example:
+
+```javascript
+const payload = {
+    product: { name: "Wheelchair", description: "Durable and lightweight" },
+    format: "<p>{{description}}</p>"
+};
+
+(async () => {
+    const html = await client.content.richDescriptionFullProduct(payload);
+    console.log("Rich HTML:", html);
+})();
+```
+
+### 2. `plainDescriptionFullProduct(payload)`
+
+Generate a plain text description for a product.
+
+#### Example:
+
+```javascript
+const payload = { product: { name: "Wheelchair" } };
+
+(async () => {
+    const text = await client.content.plainDescriptionFullProduct(payload);
+    console.log("Plain Description:", text);
+})();
+```
+
+### 3. `generateImage(payload)`
+
+Create a product image following the given instructions.
+
+#### Example:
+
+```javascript
+const imagePayload = {
+    product: { name: "Wheelchair" },
+    instructions: "Show in a natural environment"
+};
+
+(async () => {
+    const image = await client.content.generateImage(imagePayload);
+    console.log("Image URL:", image);
+})();
+```
+
+---
+
 ## Error Handling
 
 All methods throw detailed error messages if something goes wrong. Use `try-catch` blocks to handle errors:
 
 ```javascript
 try {
-    const title = await client.metaTitle(product);
+    const title = await client.seo.metaTitle(product);
     console.log("Meta Title:", title);
 } catch (error) {
     console.error("Error:", error.message);
