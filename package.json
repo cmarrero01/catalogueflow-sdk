@@ -19,7 +19,7 @@
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
-    "test": "node dist/test/test.js",
+    "test": "node --experimental-test-module-mocks --test \"test/*.js\"",
     "clean": "rimraf dist"
   },
   "files": [
